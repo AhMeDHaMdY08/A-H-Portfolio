@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ahmed Hamdy | Educator & Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1A365D;   
+            --accent: #D69E2E;    
+            --bg-base: #F7FAFC;   
+            --card-bg: #FFFFFF;
+            --text-main: #2D3748;
+            --text-muted: #718096;
+            --border-color: #E2E8F0;
+            --success: #38A169;
+            --danger: #E53E3E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-base);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000; padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links li a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; transition: color 0.3s ease; }
+        .nav-links li a:hover { color: var(--accent); }
+        .hamburger { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background-color: var(--card-bg); padding: 100px 20px 40px;
+        }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .hero h2 { font-size: 1.2rem; font-weight: 400; color: var(--text-muted); margin-bottom: 2rem; max-width: 600px;}
+        .btn-main { background: var(--primary); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: 600; transition: 0.3s; margin-top: 10px;}
+        .btn-main:hover { background: var(--accent); color: var(--primary); }
+
+        /* --- GENERAL SECTIONS --- */
+        section { padding: 6rem 5%; }
+        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 3rem; font-family: 'Playfair Display', serif; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin: 15px auto 0; }
+
+        /* --- GRAPHIC DESIGN PORTFOLIO --- */
+        .portfolio-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+        }
+        .portfolio-item {
+            position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); aspect-ratio: 4/3;
+        }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .portfolio-item:hover img { transform: scale(1.1); }
+        .portfolio-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 54, 93, 0.85);
+            color: white; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease; text-align: center; padding: 20px;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--accent); }
+
+        /* --- SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .service-card {
+            background: var(--card-bg); padding: 2.5rem; border-radius: 12px; text-align: center;
+            border: 1px solid var(--border-color); transition: transform 0.3s ease;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: var(--accent); }
+        .service-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .service-card h3 { color: var(--primary); margin-bottom: 1rem; }
+        .service-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* --- WORKSHOPS --- */
+        .workshop-card {
+            background: var(--card-bg); display: flex; border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border-color); margin-bottom: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .workshop-date {
+            background: var(--primary); color: white; padding: 2rem; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; min-width: 150px;
+        }
+        .workshop-date span.day { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1;}
+        .workshop-content { padding: 2rem; }
+        .workshop-content h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem;}
+
+        /* --- ASSESSMENT PORTAL (From previous version) --- */
+        .search-wrapper {
+            background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 12px;
+            padding: 0.8rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: relative; max-width: 900px; margin: 0 auto;
+        }
+        .search-input { border: none; width: 100%; font-size: 1rem; outline: none; color: var(--text-main); background: transparent; }
+        .search-results-dropdown {
+            position: absolute; top: 100%; left: 0; right: 0; background: var(--card-bg);
+            border: 1px solid var(--border-color); border-radius: 8px; max-height: 260px; overflow-y: auto; z-index: 10; display: none;
+        }
+        .result-item { padding: 0.8rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; border-bottom: 1px solid var(--bg-base); }
+        .result-item:hover { background: var(--bg-base); }
+        .result-dashboard { margin-top: 2.5rem; display: none; }
+        
+        .profile-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, #2B6CB0 100%); border-radius: 12px 12px 0 0;
+            padding: 2rem; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+        }
+        .status-pill { background: var(--accent); color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 800; font-size: 0.85rem;}
+        .metrics-grid {
+            background: var(--card-bg); border: 1px solid var(--border-color); border-top: none;
+            padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
+        }
+        .metric-box { display: flex; flex-direction: column; gap: 0.5rem; }
+        .metric-header { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; }
+        .progress-track { height: 10px; background: var(--bg-base); border-radius: 6px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+
+        footer { background: var(--primary); color: white; text-align: center; padding: 2rem; font-size: 0.85rem; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%;
+                background: white; padding: 1rem 0; box-shadow: 0 5px 10px rgba(0,0,0,0.1); text-align: center;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links li { padding: 1rem 0; }
+            .hamburger { display: block; }
+            .workshop-card { flex-direction: column; }
+            .workshop-date { padding: 1rem; min-width: auto;}
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home" class="logo-text">AHMED HAMDY</a>
+        <div class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#portfolio" onclick="toggleMenu()">Design Portfolio</a></li>
+            <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+            <li><a href="#workshops" onclick="toggleMenu()">Workshops</a></li>
+            <li><a href="#assessment" onclick="toggleMenu()">Grading System</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Ahmed Hamdy</h1>
+        <h2>Empowering the next generation through Art Education, while crafting beautiful visual identities as a Senior Graphic Designer.</h2>
+        <a href="#portfolio" class="btn-main">Explore My Work</a>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Graphic Design Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1626785773579-c13f6cb0218f?q=80&w=600&auto=format&fit=crop" alt="Brand Identity">
+                <div class="portfolio-overlay">
+                    <h3>Brand Identity</h3>
+                    <p>Complete logo and visual system design for corporate clients.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600&auto=format&fit=crop" alt="UI/UX Design">
+                <div class="portfolio-overlay">
+                    <h3>UI / UX Design</h3>
+                    <p>User-centered app and web interface designs.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600&auto=format&fit=crop" alt="Digital Typography">
+                <div class="portfolio-overlay">
+                    <h3>Digital Typography</h3>
+                    <p>Custom Arabic and English typographic layouts.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop" alt="Social Media Campaigns">
+                <div class="portfolio-overlay">
+                    <h3>Social Media Campaigns</h3>
+                    <p>High-conversion visual assets for digital marketing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background-color: var(--bg-base);">
+        <h2 class="section-title">Professional Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fa-solid fa-bezier-curve"></i>
+                <h3>Graphic Design</h3>
+                <p>Delivering high-end logos, branding materials, and complete visual identities tailored to your business goals.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h3>Art Education</h3>
+                <p>Developing comprehensive art curricula and leading classroom environments that foster student creativity and skill.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Educational Tech</h3>
+                <p>Building automated grading systems, student tracking portals, and interactive digital classroom tools.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="workshops">
+        <h2 class="section-title">Workshops & Training</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+            
+            <div class="workshop-card">
+                <div class="workshop-date">
+                    <span>MAR</span>
+                    <span class="day">15</span>
+                    <span>2026</span>
+                </div>
+                <div class="workshop-content">
+                    <h3>Advanced Fine Art Techniques</h3>
+                    <p style="color:var(--text-muted); margin-bottom: 10px;"><i class="fa-solid fa-location-dot"></i> Al Forqan International School</p>
+                    <p>A hands-on workshop focused on bridging traditional studio habits with modern aesthetic literacy for advanced students.</p>
+                </div>
+            </div>
+
+            <div class="workshop-card">
+                <div class="workshop-date">
+                    <span>APR</span>
+                    <span class="day">02</span>
+                    <span>2026</span>
+                </div>
+                <div class="workshop-content">
+                    <h3>Project Management (PMP) in Education</h3>
+                    <p style="color:var(--text-muted); margin-bottom: 10px;"><i class="fa-solid fa-location-dot"></i> King Fahad Public Library (Online)</p>
+                    <p>Training educators on how to apply strict Project Management Professional methodologies to curriculum planning and exhibition execution.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="assessment" style="background-color: var(--bg-base);">
+        <h2 class="section-title">Student Grading System</h2>
+        
+        <div class="portal-container">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search by Student Name or ID (e.g., Omar, STD-6A-01)..." oninput="filterStudents()" onfocus="filterStudents()">
+                <div class="search-results-dropdown" id="dropdownList"></div>
+            </div>
+
+            <div class="result-dashboard" id="studentDashboard">
+                <div class="profile-banner">
+                    <div>
+                        <h3 id="renderName">Student Name</h3>
+                        <h4 id="renderArabic" style="color:var(--accent); font-family:'Cairo',sans-serif; margin-top:5px;">الاسم باللغة العربية</h4>
+                        <p id="renderDetails" style="font-size:0.9rem; margin-top:5px; opacity:0.9;">Grade | ID: ---</p>
+                    </div>
+                    <div class="status-pill" id="renderTrack">Standard Track</div>
+                </div>
+
+                <div class="metrics-grid" style="border-bottom:none; border-radius: 0;">
+                    <div class="metric-box">
+                        <div class="metric-header">
+                            <span>Absenteeism</span>
+                            <span id="txtAbs" style="color:var(--danger); font-weight:800;">0 Days</span>
+                        </div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-header">
+                            <span>Total Participation</span>
+                            <span id="txtPart" style="color:var(--success);">0/100</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" id="fillPart" style="background-color: var(--success); width: 0%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="rubric-container">
+                    <div class="rubric-title" style="margin-bottom: 20px;">
+                        <span>Formative Assessment Breakdown</span>
+                    </div>
+
+                    <div class="metrics-grid" style="border:none; padding:0 0 1rem 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                        <div class="metric-box">
+                            <div class="metric-header"><span>Technical Skill & Craftsmanship</span><span id="txtTech" style="color:var(--primary);">0/30</span></div>
+                            <div class="progress-track"><div class="progress-fill" id="fillTech" style="background-color: var(--primary); width: 0%;"></div></div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-header"><span>Creativity & Originality</span><span id="txtCreat" style="color:var(--primary);">0/20</span></div>
+                            <div class="progress-track"><div class="progress-fill" id="fillCreat" style="background-color: var(--primary); width: 0%;"></div></div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-header"><span>Relevance & Alignment</span><span id="txtRel" style="color:var(--primary);">0/20</span></div>
+                            <div class="progress-track"><div class="progress-fill" id="fillRel" style="background-color: var(--primary); width: 0%;"></div></div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-header"><span>Elements & Principles of Design</span><span id="txtElem" style="color:var(--primary);">0/15</span></div>
+                            <div class="progress-track"><div class="progress-fill" id="fillElem" style="background-color: var(--primary); width: 0%;"></div></div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-header"><span>Process & Effort</span><span id="txtProc" style="color:var(--primary);">0/15</span></div>
+                            <div class="progress-track"><div class="progress-fill" id="fillProc" style="background-color: var(--primary); width: 0%;"></div></div>
+                        </div>
+                        
+                        <div class="metric-box" style="margin-top: 1rem; padding-top: 1rem; border-top: 2px dashed var(--border-color);">
+                            <div class="metric-header" style="font-size: 1.1rem; color:var(--primary);">
+                                <span>Total Mark</span>
+                                <span id="txtTotal" style="color:var(--accent); font-weight:800;">0/100</span>
+                            </div>
+                            <div class="progress-track" style="height: 14px;"><div class="progress-fill" id="fillTotal" style="background-color: var(--accent); width: 0%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 | Designed & Developed by Ahmed Hamdy Creative Design | All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // =======================================================================
+        // PASTE YOUR MASSIVE 'const DB = { ... }' BLOCK FROM THE PREVIOUS CHAT HERE!
+        // (I included a dummy 3-student database below just so the code runs immediately)
+        // =======================================================================
+        const DB = {
+            "STD-6A-01":["Ahmed Ghalib","احمد غالب","Grade 6 - Division A",6,105,30,20,20,15,15],
+            "STD-6A-04":["Abdulrahman Khaled","عبدالرحمن خالد","Grade 6 - Division A",10,112,25,18,17,14,15],
+            "STD-5B-11":["Abdulrahman Mohamed","عبدالرحمن محمد","Grade 5 - Division B",0,0,30,20,20,15,15]
+        };
+        // =======================================================================
+
+        const STUDENT_DATABASE = {};
+        for (const [id, data] of Object.entries(DB)) {
+            STUDENT_DATABASE[id] = { name: data[0], arabicName: data[1], grade: data[2], abs: data[3], part: data[4], tech: data[5], creat: data[6], rel: data[7], elem: data[8], proc: data[9] };
+        }
+
+        function filterStudents() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const dropdown = document.getElementById('dropdownList');
+            dropdown.innerHTML = '';
+            if (!query) { dropdown.style.display = 'none'; return; }
+
+            let matches = 0;
+            for (const [id, data] of Object.entries(STUDENT_DATABASE)) {
+                if (data.name.toLowerCase().includes(query) || data.arabicName.toLowerCase().includes(query) || id.toLowerCase().includes(query)) {
+                    matches++;
+                    const item = document.createElement('div');
+                    item.className = 'result-item';
+                    item.innerHTML = `
+                        <div>
+                            <strong style="color:var(--primary); font-size:0.95rem;">${data.name}</strong>
+                            <span style="color:var(--accent); font-weight:700; font-size:0.85rem; margin-left:0.5rem; font-family:'Cairo',sans-serif;">${data.arabicName}</span>
+                        </div>
+                        <span style="font-size:0.75rem; background:var(--bg-base); padding:0.2rem 0.5rem; border-radius:4px; font-weight:700; color:var(--primary);">${id}</span>
+                    `;
+                    item.onclick = () => loadStudentData(id);
+                    dropdown.appendChild(item);
+                }
+            }
+            dropdown.style.display = matches > 0 ? 'block' : 'none';
+        }
+
+        function loadStudentData(id) {
+            const student = STUDENT_DATABASE[id];
+            if (!student) return;
+
+            document.getElementById('searchInput').value = `${student.name} (${id})`;
+            document.getElementById('dropdownList').style.display = 'none';
+            document.getElementById('studentDashboard').style.display = 'block';
+
+            document.getElementById('renderName').innerText = student.name;
+            document.getElementById('renderArabic').innerText = student.arabicName;
+            document.getElementById('renderDetails').innerHTML = `${student.grade} | Verification ID: <strong>${id}</strong>`;
+            
+            const totalScore = student.tech + student.creat + student.rel + student.elem + student.proc;
+
+            const trackPill = document.getElementById('renderTrack');
+            let trackName = totalScore >= 85 ? "Gifted Registry" : (totalScore <= 50 && totalScore > 0 ? "Remedial Plan" : "Standard Track");
+            if (totalScore === 0) trackName = "Pending Assessment";
+            trackPill.innerText = trackName;
+            trackPill.style.background = trackName === "Gifted Registry" ? "var(--accent)" : (trackName === "Remedial Plan" ? "var(--danger)" : "#E2E8F0");
+            trackPill.style.color = trackName === "Gifted Registry" ? "var(--primary)" : (trackName === "Remedial Plan" ? "white" : "var(--text-main)");
+
+            setTimeout(() => {
+                document.getElementById('txtAbs').innerText = student.abs + " Days";
+                document.getElementById('fillPart').style.width = student.part + '%';
+                document.getElementById('txtPart').innerText = student.part + '/100';
+
+                document.getElementById('fillTech').style.width = (student.tech / 30 * 100) + '%'; document.getElementById('txtTech').innerText = student.tech + '/30';
+                document.getElementById('fillCreat').style.width = (student.creat / 20 * 100) + '%'; document.getElementById('txtCreat').innerText = student.creat + '/20';
+                document.getElementById('fillRel').style.width = (student.rel / 20 * 100) + '%'; document.getElementById('txtRel').innerText = student.rel + '/20';
+                document.getElementById('fillElem').style.width = (student.elem / 15 * 100) + '%'; document.getElementById('txtElem').innerText = student.elem + '/15';
+                document.getElementById('fillProc').style.width = (student.proc / 15 * 100) + '%'; document.getElementById('txtProc').innerText = student.proc + '/15';
+                
+                document.getElementById('fillTotal').style.width = totalScore + '%'; document.getElementById('txtTotal').innerText = totalScore + '/100';
+            }, 50);
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!document.querySelector('.search-wrapper').contains(e.target)) document.getElementById('dropdownList').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
